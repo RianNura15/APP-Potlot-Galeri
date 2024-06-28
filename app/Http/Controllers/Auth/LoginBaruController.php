@@ -51,21 +51,24 @@ class LoginBaruController extends Controller
         'koderef_cust' => 'required',
       ]);
 
-      $cek = DB::table('users')->get();
+      $cek = DB::table('users')->where('koderef_mark', $input['koderef_cust'])->first();
 
-      DB::table('users')->where('email', $input['email'])->update([
-        'koderef_cust' => $input['koderef_cust'],
-      ]);
-      
-      if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'verif'=>'login')))
-      {
-        if (auth()->user()->role == 'customer') {
-          return redirect()->route('blog.index');
+      if ($cek && $input['koderef_cust'] == $cek->koderef_mark) {
+        DB::table('users')->where('email', $input['email'])->update([
+          'koderef_cust' => $input['koderef_cust'],
+        ]);
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'verif'=>'login')))
+        {
+          if (auth()->user()->role == 'customer') {
+            return redirect()->route('blog.index');
+          }
+        } else {
+            return redirect()->route('login')
+                ->with('error', 'Email or Password is incorrect.');
         }
-      }else{
-        return redirect()->route('login')
-        ->with('error','Email-Address And Password Are Wrong.');
+      } else {
+          return redirect()->route('login')
+            ->with('error', 'Invalid koderef_cust.');
       }
-
     }
   }
