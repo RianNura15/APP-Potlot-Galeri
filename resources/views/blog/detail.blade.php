@@ -36,7 +36,9 @@
           <tr><td><strong>Diskon</strong></td><td>:</td><td>{{$get->promo}} %</td></tr>
           <tr><td><strong>Harga Akhir</strong></td><td>:</td><td>{{rupiah($get->harga-($get->promo/100)*$get->harga)}}</td></tr>
         </table>
+        @auth
         <input type="hidden" class="form-control" name="pemasar" value="{{Auth()->user()->koderef_cust}}">
+        @endauth
         <p><button onclick="tambah_keranjang({{$get->id}})" class="btn btn-warning" type="button" name="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambahkan Troli</button></p>
       </div>
       <div class="portfolio-description">
