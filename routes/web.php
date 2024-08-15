@@ -194,18 +194,24 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
   });
 
   Route::prefix('pendapatan')->name('pendapatan.')->group(function(){
-    Route::get('','pendapatanController@index')->name('index');
+    Route::get('index','pendapatanController@index')->name('index');
     Route::get('get_data_pmsn','pendapatanController@get_data_pmsn')->name('get_data_pmsn');
+    Route::get('get_data_tahun','pendapatanController@getDataTahun')->name('get_data_tahun');
+    Route::get('get_data_bulan','pendapatanController@getDataBulan')->name('get_data_bulan');
     Route::get('d_pmsn','pendapatanController@d_pmsn')->name('d_pmsn');
     Route::get('b_pmsn','pendapatanController@b_pmsn')->name('b_pmsn');
     Route::get('t_pmsn','pendapatanController@t_pmsn')->name('t_pmsn');
+    Route::get('total_harga_bulan','pendapatanController@totalHargaBulan')->name('total_harga_bulan');
     Route::get('get_grafik_pmsn','pendapatanController@get_grafik_pmsn')->name('get_grafik_pmsn');
     
     Route::get('cstm','pendapatanController@cstm')->name('cstm');
     Route::get('get_data_cstm','pendapatanController@get_data_cstm')->name('get_data_cstm');
+    Route::get('get_data_tahun_cstm','pendapatanController@getDataTahunCstm')->name('get_data_tahun_cstm');
+    Route::get('get_data_bulan_cstm','pendapatanController@getDataBulanCstm')->name('get_data_bulan_cstm');
     Route::get('d_cstm','pendapatanController@d_cstm')->name('d_cstm');
     Route::get('b_cstm','pendapatanController@b_cstm')->name('b_cstm');
     Route::get('t_cstm','pendapatanController@t_cstm')->name('t_cstm');
+    Route::get('total_harga_bulan_cstm','pendapatanController@totalHargaBulanCstm')->name('total_harga_bulan_cstm');
     Route::get('get_grafik_cstm','pendapatanController@get_grafik_cstm')->name('get_grafik_cstm');
   });
 });
